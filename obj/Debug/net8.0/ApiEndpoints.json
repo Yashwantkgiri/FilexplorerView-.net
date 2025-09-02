@@ -1,0 +1,133 @@
+[
+  {
+    "ContainingType": "FileController",
+    "Method": "CreateFile",
+    "RelativePath": "api/File/create-file",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "folderPath",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FileController",
+    "Method": "DeleteFile",
+    "RelativePath": "api/File/delete-file",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "path",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FileController",
+    "Method": "GetFolderContents",
+    "RelativePath": "api/File/folder-contents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "path",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FileController",
+    "Method": "SetProvider",
+    "RelativePath": "api/File/set-provider",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "provider",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FileController",
+    "Method": "UploadFile",
+    "RelativePath": "api/File/upload-file",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "folderPath",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FileController",
+    "Method": "ViewFile",
+    "RelativePath": "api/File/view-file",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "path",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

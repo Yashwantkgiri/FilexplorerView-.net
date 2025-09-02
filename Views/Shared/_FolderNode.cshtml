@@ -1,0 +1,68 @@
+﻿@* @model FileExplorerApplicationV1.Models.FolderNode
+
+<div class="folder-container">
+    <!-- Folder Item -->
+    <div class="folder-item" data-path="@Model.FullPath">
+        <i class="fas fa-folder text-warning"></i>
+        <strong>@Model.Name</strong>
+        @if (Model.ChildCount > 0)
+        {
+            <small class="text-muted">(@Model.ChildCount items)</small>
+        }
+    </div>
+
+    <!-- Files in current folder -->
+    @if (Model.Files.Any())
+    {
+        <div class="files-container" style="margin-left: 20px;">
+            @foreach (var file in Model.Files.OrderBy(f => f.Name))
+            {
+                <div class="file-item" data-path="@file.FullPath" style="cursor: pointer;">
+                    <i class="fas @GetFileIcon(file.Extension) text-info"></i>
+                    @file.Name
+                    <small class="text-muted">(@FormatFileSize(file.Size))</small>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Subfolders -->
+    @if (Model.SubFolders.Any())
+    {
+        <div class="subfolders-container" style="margin-left: 20px;">
+            @foreach (var subfolder in Model.SubFolders.OrderBy(f => f.Name))
+            {
+                @await Html.PartialAsync("_FolderNode", subfolder)
+            }
+        </div>
+    }
+</div>
+
+@functions {
+    private string GetFileIcon(string extension)
+    {
+        return extension?.ToLowerInvariant() switch
+        {
+            ".txt" => "fa-file-alt",
+            ".json" => "fa-file-code",
+            ".xml" => "fa-file-code",
+            ".pdf" => "fa-file-pdf",
+            ".doc" or ".docx" => "fa-file-word",
+            ".csv" => "fa-file-csv",
+            _ => "fa-file"
+        };
+    }
+
+    private string FormatFileSize(long bytes)
+    {
+        string[] sizes = { "B", "KB", "MB", "GB" };
+        double len = bytes;
+        int order = 0;
+        while (len >= 1024 && order < sizes.Length - 1)
+        {
+            order++;
+            len = len / 1024;
+        }
+        return $"{len:0.##} {sizes[order]}";
+    }
+} *@

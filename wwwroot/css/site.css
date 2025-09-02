@@ -1,0 +1,752 @@
+/* =====================
+   Global Styles
+   ===================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+/* =====================
+   Enhanced Header Styles
+   ===================== */
+.navbar {
+    min-height: 56px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+/* Path Navigator Styles */
+#path-navigator {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+    #path-navigator:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+#navigate-btn {
+    transition: all 0.2s ease;
+}
+
+    #navigate-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+.btn-group .btn {
+    transition: all 0.2s ease;
+}
+
+    .btn-group .btn:hover:not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+/* =====================
+   Breadcrumb Styles
+   ===================== */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0.5rem 0;
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    color: #0d6efd;
+    transition: color 0.2s ease;
+}
+
+    .breadcrumb-item a:hover {
+        color: #0a58ca;
+        text-decoration: underline !important;
+    }
+
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+
+/* =====================
+   Layout Grid
+   ===================== */
+.main-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    height: calc(100vh - 56px);
+}
+
+/* =====================
+   Explorer (Tree View)
+   ===================== */
+.folder-tree {
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #fff;
+}
+
+.tree-view .folder-node {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border: none;
+    margin: 1px 0;
+}
+
+    .tree-view .folder-node:hover {
+        background-color: #e3f2fd;
+        transform: translateX(2px);
+    }
+
+    .tree-view .folder-node.active {
+        background-color: #0d6efd;
+        color: #fff;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+    }
+
+.tree-view .file-node {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    border: none;
+    margin: 1px 0;
+}
+
+    .tree-view .file-node:hover {
+        background-color: #f8f9fa;
+        transform: translateX(2px);
+    }
+
+.tree-view .children {
+    display: none;
+    margin-left: 18px;
+    border-left: 2px solid #dee2e6;
+    padding-left: 8px;
+    transition: all 0.3s ease;
+}
+
+    .tree-view .children.expanded {
+        display: block;
+        border-left-color: #0d6efd;
+    }
+
+.tree-view .caret {
+    margin-right: 6px;
+    transition: transform 0.2s ease;
+    color: #6c757d;
+}
+
+    .tree-view .caret.expanded {
+        transform: rotate(90deg);
+        color: #0d6efd;
+    }
+
+.file-count {
+    font-size: 0.7rem;
+    color: #6c757d;
+    margin-left: auto;
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.folder-node.active .file-count {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* =====================
+   File Viewer / Editor
+   ===================== */
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.editor-header {
+    background: linear-gradient(135deg, #2d2d30 0%, #1e1e1e 100%);
+    padding: 10px 15px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #444;
+    flex-shrink: 0;
+}
+
+    .editor-header button {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        transition: all 0.2s ease;
+    }
+
+        .editor-header button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+.editor-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    background-color: #1e1e1e;
+}
+
+.line-numbers {
+    flex-shrink: 0;
+    min-width: 60px;
+    text-align: right;
+    padding: 12px 10px;
+    color: #858585;
+    background-color: #252526;
+    border-right: 1px solid #3e3e42;
+    user-select: none;
+    overflow: hidden;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.code-content {
+    flex: 1;
+    padding: 12px 15px;
+    overflow: auto;
+    white-space: pre;
+    color: #d4d4d4;
+    background-color: #1e1e1e;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    tab-size: 4;
+}
+
+    /* Syntax highlighting styles */
+    .code-content .tag {
+        color: #569cd6;
+        cursor: pointer;
+    }
+
+    .code-content .attr-name {
+        color: #9cdcfe;
+    }
+
+    .code-content .attr-value {
+        color: #ce9178;
+    }
+
+    .code-content .content {
+        color: #d4d4d4;
+    }
+
+    .code-content .comment {
+        color: #6a9955;
+        font-style: italic;
+    }
+
+    .code-content .keyword {
+        color: #569cd6;
+        font-weight: 500;
+    }
+
+    .code-content .string {
+        color: #ce9178;
+    }
+
+    .code-content .number {
+        color: #b5cea8;
+    }
+
+.json-key {
+    color: #9cdcfe;
+    cursor: pointer;
+}
+
+.json-value {
+    color: #ce9178;
+}
+
+.selected-tag {
+    background-color: rgba(255, 255, 0, 0.3);
+    border-radius: 3px;
+    padding: 1px 2px;
+}
+
+/* =====================
+   Clickable Path Styles
+   ===================== */
+.clickable-path {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+    .clickable-path:hover {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        text-decoration: underline;
+        transform: translateY(-1px);
+    }
+
+/* =====================
+   File Table Enhancements
+   ===================== */
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+}
+
+.btn-sm {
+    transition: all 0.2s ease;
+}
+
+    .btn-sm:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+/* =====================
+   Alert Enhancements
+   ===================== */
+.alert {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d1e7dd 0%, #a3d5b8 100%);
+    border-left: 4px solid #198754;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+    border-left: 4px solid #dc3545;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #b3d7e6 100%);
+    border-left: 4px solid #0dcaf0;
+}
+
+/* =====================
+   Loading Spinner Enhancements
+   ===================== */
+.spinner-border {
+    color: #0d6efd;
+}
+
+/* =====================
+   Responsive Design
+   ===================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+
+        .navbar .input-group {
+            max-width: 100% !important;
+            min-width: auto !important;
+        }
+
+    .d-none.d-md-inline {
+        display: none !important;
+    }
+
+    .tree-view {
+        font-size: 0.85rem;
+    }
+
+    .editor-container {
+        border-radius: 4px;
+    }
+
+    .code-content {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+
+    .line-numbers {
+        min-width: 40px;
+        padding: 8px 6px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-group {
+        flex-direction: column;
+    }
+
+        .btn-group .btn {
+            border-radius: 4px !important;
+            margin-bottom: 2px;
+        }
+
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+
+    .breadcrumb-item {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+/* =====================
+   Animation Enhancements
+   ===================== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.alert {
+    animation: slideIn 0.3s ease-out;
+}
+
+.editor-container {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.tree-view .children.expanded {
+    animation: slideIn 0.2s ease-out;
+}
+
+/* =====================
+   Focus and Accessibility
+   ===================== */
+.folder-node:focus,
+.file-node:focus {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* =====================
+   File Type Icons
+   ===================== */
+.file-node i {
+    width: 16px;
+    text-align: center;
+}
+
+.file-node[data-path$=".json"] i {
+    color: #ffd700 !important;
+}
+
+.file-node[data-path$=".xml"] i,
+.file-node[data-path$=".html"] i,
+.file-node[data-path$=".htm"] i {
+    color: #ff6347 !important;
+}
+
+.file-node[data-path$=".js"] i,
+.file-node[data-path$=".javascript"] i {
+    color: #f7df1e !important;
+}
+
+.file-node[data-path$=".css"] i {
+    color: #1572b6 !important;
+}
+
+.file-node[data-path$=".txt"] i {
+    color: #6c757d !important;
+}
+
+.file-node[data-path$=".md"] i {
+    color: #083fa1 !important;
+}
+
+.file-node[data-path$=".cs"] i {
+    color: #239120 !important;
+}
+
+.file-node[data-path$=".py"] i {
+    color: #3776ab !important;
+}
+
+.file-node[data-path$=".java"] i {
+    color: #ed8b00 !important;
+}
+
+/* =====================
+   Provider Status Indicator
+   ===================== */
+.provider-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+    .provider-indicator.local {
+        background-color: #28a745;
+    }
+
+    .provider-indicator.ftp {
+        background-color: #ffc107;
+    }
+
+    .provider-indicator.sftp {
+        background-color: #17a2b8;
+    }
+
+/* =====================
+   Enhanced Table Styles
+   ===================== */
+.table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+.table .btn {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
+/* =====================
+   Syntax Highlighting Enhancements
+   ===================== */
+.code-content {
+    counter-reset: line-number;
+}
+
+    .code-content .line {
+        display: block;
+        counter-increment: line-number;
+        position: relative;
+    }
+
+        .code-content .line::before {
+            content: counter(line-number);
+            position: absolute;
+            left: -50px;
+            width: 40px;
+            text-align: right;
+            color: #858585;
+            font-size: 0.8rem;
+        }
+
+    /* Selection highlighting */
+    .code-content::selection {
+        background-color: rgba(0, 122, 255, 0.3);
+    }
+
+    .code-content::-moz-selection {
+        background-color: rgba(0, 122, 255, 0.3);
+    }
+
+/* =====================
+   Loading States
+   ===================== */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+    .loading-overlay .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+
+/* =====================
+   Dark Mode Support
+   ===================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bs-body-bg: #212529;
+        --bs-body-color: #dee2e6;
+    }
+
+    .bg-light {
+        background-color: #343a40 !important;
+    }
+
+    .text-muted {
+        color: #adb5bd !important;
+    }
+
+    .border {
+        border-color: #495057 !important;
+    }
+
+    .table {
+        --bs-table-bg: #212529;
+        --bs-table-color: #dee2e6;
+    }
+
+        .table th {
+            background-color: #343a40;
+            border-color: #495057;
+        }
+}
+
+/* =====================
+   Utility Classes
+   ===================== */
+.text-truncate-path {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* =====================
+   Scroll Enhancements
+   ===================== */
+.overflow-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #6c757d transparent;
+}
+
+    .overflow-auto::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .overflow-auto::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .overflow-auto::-webkit-scrollbar-thumb {
+        background-color: #6c757d;
+        border-radius: 4px;
+    }
+
+        .overflow-auto::-webkit-scrollbar-thumb:hover {
+            background-color: #495057;
+        }
+
+/* =====================
+   File Explorer Specific
+   ===================== */
+.file-explorer-container {
+    height: calc(100vh - 120px);
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 15px;
+}
+
+    .sidebar-header h6 {
+        color: #495057;
+        font-weight: 600;
+    }
+
+/* =====================
+   Interactive Elements
+   ===================== */
+.interactive-hover {
+    transition: all 0.2s ease;
+}
+
+    .interactive-hover:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+/* =====================
+   Status Indicators
+   ===================== */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+    border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+    .status-indicator.success {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #198754;
+        border-color: rgba(25, 135, 84, 0.2);
+    }
+
+    .status-indicator.warning {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+        border-color: rgba(255, 193, 7, 0.2);
+    }
+
+    .status-indicator.error {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+        border-color: rgba(220, 53, 69, 0.2);
+    }
